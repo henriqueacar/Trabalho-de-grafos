@@ -1,0 +1,15 @@
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/bin/Debug/net7.0/TrabalhoGrafos
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/bin/Debug/net7.0/TrabalhoGrafos.deps.json
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/bin/Debug/net7.0/TrabalhoGrafos.runtimeconfig.json
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/bin/Debug/net7.0/TrabalhoGrafos.dll
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/bin/Debug/net7.0/TrabalhoGrafos.pdb
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/TrabalhoGrafos.csproj.AssemblyReference.cache
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/TrabalhoGrafos.GeneratedMSBuildEditorConfig.editorconfig
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/TrabalhoGrafos.AssemblyInfoInputs.cache
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/TrabalhoGrafos.AssemblyInfo.cs
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/TrabalhoGrafos.csproj.CoreCompileInputs.cache
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/TrabalhoGrafos.dll
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/refint/TrabalhoGrafos.dll
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/TrabalhoGrafos.pdb
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/TrabalhoGrafos.genruntimeconfig.cache
+/Users/igorwestermann/Dev/UFJF/Grafos/Trabalho-de-grafos/TrabalhoGrafos/obj/Debug/net7.0/ref/TrabalhoGrafos.dll
