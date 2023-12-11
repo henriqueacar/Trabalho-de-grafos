@@ -62,19 +62,19 @@ class Program
                     switch (choice)
                     {
                         case 5:
-                            Console.WriteLine("Choose the initial vertex");
+                            Console.WriteLine("Choose the initial vertex.");
                             initialVertex = int.Parse(Console.ReadLine());
                             graph.ExecuteBFS(initialVertex);
 
                             break;
                         case 6:
-                            Console.WriteLine("Choose the initial vertex");
+                            Console.WriteLine("Choose the initial vertex.");
                             initialVertex = int.Parse(Console.ReadLine());
                             graph.ExecuteDFS(initialVertex);
 
                             break;
                         case 7:
-                            Console.WriteLine("Choose the initial vertex");
+                            Console.WriteLine("Choose the initial vertex.");
                             initialVertex = int.Parse(Console.ReadLine());
                             graph.ExecuteDijkstra(initialVertex);
 
