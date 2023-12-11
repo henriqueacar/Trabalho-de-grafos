@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using TrabalhoGrafos.Graph;
 
+
 class Program
 {
     public static void Main()
@@ -30,26 +31,68 @@ class Program
                         break;
                     case 3:
                         graphType = "DigrafoSimplesValorado";
-                        
                         break;
                     case 4:
                         Console.WriteLine("Exiting the program. Press Enter to close.");
                         break;
                     default:
                         Console.WriteLine("Invalid choice. Please enter a number between 1 and 4.");
-                        break;
+                        continue;
                 }
+
                 graph.ReadGraph($"C:/Users/iwest/RiderProjects/Trabalho-de-grafos/TrabalhoGrafos/{graphType}.txt");
                 graph.DisplayInscidenceList();
                 graph.DisplayAdjacencyMatrix();
                 graph.DisplayIncidenceTable();
-                graph.SaveGraph($"C:/Users/iwest/RiderProjects/Trabalho-de-grafos/TrabalhoGrafos/{graphType}_output.txt");
+
+                Console.WriteLine("\nAlgorithm Options:");
+                Console.WriteLine("5. Breadth-First Search (BFS)");
+                Console.WriteLine("6. Depth-First Search (DFS)");
+                Console.WriteLine("7. Prim's Algorithm");
+                Console.WriteLine("8. Dijkstra's Algorithm");
+                Console.WriteLine("9. Topological Sort");
+                Console.WriteLine("10. Eulerian Cycle");
+                Console.WriteLine("11. Back to Main Menu");
+
+                Console.Write("Enter your choice (5-11): ");
+                if (int.TryParse(Console.ReadLine(), out choice))
+                {
+                    switch (choice)
+                    {
+                        case 5:
+                            graph.ExecuteBFS(0);
+                            break;
+                        case 6:
+                            graph.ExecuteDFS(0);
+                            break;
+                        case 7:
+                            graph.ExecuteDijkstra(0);
+                            break;
+                        case 8:
+                            graph.ExecutePrim();
+                            break;
+                        case 9:
+                            graph.ExecuteTopologicalSort();
+                            break;
+                        case 10:
+                            graph.ExecuteEulerianCycle();
+                            break;
+                        case 11:
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice. Please enter a number between 5 and 11.");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
             }
             else
             {
                 Console.WriteLine("Invalid input. Please enter a valid number.");
             }
-
-        } while (choice < 4);
+        } while (choice != 4);
     }
 }
