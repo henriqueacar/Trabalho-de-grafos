@@ -1,6 +1,8 @@
+using TrabalhoGrafos.Graph.Algorithms;
+
 namespace TrabalhoGrafos.Graph;
 
-internal class Graph
+public class Graph
 {
     private int[,] incidenceMatrix;
     private int[,] adjacencyMatrix;
@@ -147,5 +149,47 @@ internal class Graph
         {
             Console.WriteLine($"An error occurred while saving the graph: {ex.Message}");
         }
+    }
+    
+    // Busca em Largura (Breadth-First Search - BFS)
+    public void ExecuteBFS(int startVertex)
+    {
+        var bfs = new BFS();
+        bfs.Execute(this, startVertex);
+    }
+
+    // Busca em Profundidade (Depth-First Search - DFS)
+    public void ExecuteDFS(int startVertex)
+    {
+        var dfs = new DFS();
+        dfs.Execute(this, startVertex);
+    }
+
+    // Prim
+    public void ExecutePrim()
+    {
+        var prim = new Prim();
+        prim.Execute(this);
+    }
+
+    // Dijkstra
+    public void ExecuteDijkstra(int startVertex)
+    {
+        var dijkstra = new Dijkstra();
+        dijkstra.Execute(this, startVertex);
+    }
+
+    // Ordenação Topologica
+    public void ExecuteTopologicalSort()
+    {
+        var topologicalSort = new TopologicalSort();
+        topologicalSort.Execute(this);
+    }
+
+    // Ciclo Euleriano
+    public void ExecuteEulerianCycle()
+    {
+        var eulerianCycle = new EulerianCycle();
+        eulerianCycle.Execute(this); 
     }
 }
