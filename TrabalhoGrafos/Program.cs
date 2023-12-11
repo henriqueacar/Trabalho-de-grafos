@@ -57,16 +57,27 @@ class Program
                 Console.Write("Enter your choice (5-11): ");
                 if (int.TryParse(Console.ReadLine(), out choice))
                 {
+                    var initialVertex = new int();
+                    
                     switch (choice)
                     {
                         case 5:
-                            graph.ExecuteBFS(0);
+                            Console.WriteLine("Choose the initial vertex");
+                            initialVertex = int.Parse(Console.ReadLine());
+                            graph.ExecuteBFS(initialVertex);
+
                             break;
                         case 6:
-                            graph.ExecuteDFS(0);
+                            Console.WriteLine("Choose the initial vertex");
+                            initialVertex = int.Parse(Console.ReadLine());
+                            graph.ExecuteDFS(initialVertex);
+
                             break;
                         case 7:
-                            graph.ExecuteDijkstra(0);
+                            Console.WriteLine("Choose the initial vertex");
+                            initialVertex = int.Parse(Console.ReadLine());
+                            graph.ExecuteDijkstra(initialVertex);
+
                             break;
                         case 8:
                             graph.ExecutePrim();
