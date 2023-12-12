@@ -1,14 +1,16 @@
+using TrabalhoGrafos.Graph.Models;
+
 namespace TrabalhoGrafos.Graph.Algorithms;
 
 public class EulerianCycle: IGraphAlgorithm
 {
-    public void Execute(GraphUtils graphUtils)
+    public void Execute(Grafo grafo, GraphUtils graphUtils)
     {
         throw new NotImplementedException();
     }
     
     // Not Used
-    public void Execute(GraphUtils graphUtils, int startVertex)
+    public void Execute(Grafo grafo, GraphUtils graphUtils, int startVertex)
     {
         throw new NotImplementedException();
     }

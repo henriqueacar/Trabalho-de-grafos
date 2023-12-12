@@ -1,4 +1,5 @@
 using TrabalhoGrafos.Graph.Algorithms;
+using TrabalhoGrafos.Graph.Models;
 
 namespace TrabalhoGrafos.Graph;
 
@@ -85,7 +86,7 @@ public class GraphUtils
     }
     
     // Lê o grafo e inicializa a representação
-    public void ReadGraph(string filePath)
+    public void ReadGraph(string filePath, int choice)
     {
         try
         {
@@ -129,7 +130,7 @@ public class GraphUtils
             
             TransformToIncidenceMatrix();
             TransformToAdjacencyMatrix();
-            TransformToAdjacencyList();
+            TransformToAdjacencyList(choice);
             Console.WriteLine("Graph transformado.");
         }
         catch (Exception ex)
@@ -177,7 +178,7 @@ public class GraphUtils
     }
 
     // Função para transformar grafo lido em um Lista de Adjacência
-    public List<List<int>> TransformToAdjacencyList()
+    public List<List<int>> TransformToAdjacencyList(int choice)
     {
         var numVertices = AdjacencyMatrix.GetLength(0);
         AdjacencyList = new List<List<int>>(numVertices);
@@ -185,16 +186,34 @@ public class GraphUtils
         for (var i = 0; i < numVertices; i++)
         {
             AdjacencyList.Add(new List<int>());
+        }
 
-            for (var j = 0; j < numVertices; j++)
-            {
-                if (AdjacencyMatrix[i, j] != 0)
+        if(choice == 1){ //Choice 1 = grafo simples
+            for(var i = 0; i < numVertices; i++){
+                for (var j = 0; j < numVertices; j++)
                 {
-                    AdjacencyList[i].Add(j);
+                    if (AdjacencyMatrix[i, j] != 0)
+                    {
+                        AdjacencyList[i].Add(j);
+                    if(AdjacencyMatrix[j, i] == 0)
+                            AdjacencyList[j].Add(i);
+                    }
+
                 }
             }
         }
+        else {
+            for(var i = 0; i < numVertices; i++){
+                for (var j = 0; j < numVertices; j++)
+                {
+                    if (AdjacencyMatrix[i, j] != 0)
+                    {
+                        AdjacencyList[i].Add(j);
+                    }
 
+                }
+            }
+        }
         return AdjacencyList;
     }
     
@@ -243,44 +262,44 @@ public class GraphUtils
     }
     
     // Busca em Largura (Breadth-First Search - BFS)
-    public void ExecuteBFS(int startVertex)
+    public void ExecuteBFS(int startVertex, Grafo grafo)
     {
         var bfs = new BFS();
-        bfs.Execute(this, startVertex);
+        bfs.Execute(grafo, this, startVertex);
     }
 
     // Busca em Profundidade (Depth-First Search - DFS)
-    public void ExecuteDFS(int startVertex)
+    public void ExecuteDFS(int startVertex, Grafo grafo)
     {
         var dfs = new DFS();
-        dfs.Execute(this, startVertex);
+        dfs.Execute(grafo, this, startVertex);
     }
 
     // Prim
-    public void ExecutePrim()
+    public void ExecutePrim(Grafo grafo)
     {
         var prim = new Prim();
-        prim.Execute(this);
+        prim.Execute(grafo, this);
     }
 
     // Dijkstra
-    public void ExecuteDijkstra(int startVertex)
+    public void ExecuteDijkstra(int startVertex, Grafo grafo)
     {
         var dijkstra = new Dijkstra();
-        dijkstra.Execute(this, startVertex);
+        dijkstra.Execute(grafo, this, startVertex);
     }
 
     // Ordenação Topologica
-    public void ExecuteTopologicalSort()
+    public void ExecuteTopologicalSort(Grafo grafo)
     {
         var topologicalSort = new TopologicalSort();
-        topologicalSort.Execute(this);
+        topologicalSort.Execute(grafo, this);
     }
 
     // Ciclo Euleriano
-    public void ExecuteEulerianCycle()
+    public void ExecuteEulerianCycle(Grafo grafo)
     {
         var eulerianCycle = new EulerianCycle();
-        eulerianCycle.Execute(this); 
+        eulerianCycle.Execute(grafo, this); 
     }
 }
