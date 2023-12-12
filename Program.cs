@@ -40,8 +40,8 @@ class Program
                         continue;
                 }
 
-                graph.ReadGraph($"C:/Users/iwest/RiderProjects/Trabalho-de-grafos/TrabalhoGrafos/{graphType}.txt");
-                graph.DisplayInscidenceList();
+                graph.ReadGraph($"./../../../{graphType}.txt");
+                graph.DisplayAdjacencyList();
                 graph.DisplayAdjacencyMatrix();
                 graph.DisplayIncidenceTable();
 
