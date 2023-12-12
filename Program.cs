@@ -42,7 +42,7 @@ class Program
                         continue;
                 }
 
-                graph.ReadGraph($"./../../../{graphType}.txt");
+                graph.ReadGraph($"./{graphType}.txt");
                 
                 var matrizAdjacencia = graph.TransformToAdjacencyMatrix();
                 

@@ -185,13 +185,19 @@ public class GraphUtils
         for (var i = 0; i < numVertices; i++)
         {
             AdjacencyList.Add(new List<int>());
+        }
 
+        for(var i = 0; i < numVertices; i++){
+        
             for (var j = 0; j < numVertices; j++)
             {
                 if (AdjacencyMatrix[i, j] != 0)
                 {
                     AdjacencyList[i].Add(j);
+                    if(AdjacencyMatrix[j, i] == 0)
+                        AdjacencyList[j].Add(i);
                 }
+
             }
         }
 

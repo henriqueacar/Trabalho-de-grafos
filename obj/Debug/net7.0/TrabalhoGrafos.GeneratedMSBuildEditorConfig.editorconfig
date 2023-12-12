@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TrabalhoGrafos
-build_property.ProjectDir = C:\Users\iwest\RiderProjects\Trabalho-de-grafos\
+build_property.ProjectDir = C:\Users\henri\Documents\Projetos\TrabalhoDeGrafos\Trabalho-de-grafos\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
