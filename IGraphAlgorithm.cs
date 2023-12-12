@@ -2,6 +2,6 @@ namespace TrabalhoGrafos.Graph;
 
 public interface IGraphAlgorithm
 {
-    void Execute(Graph graph, int startVertex);
-    void Execute(Graph graph);
+    void Execute(GraphUtils graphUtils, int startVertex);
+    void Execute(GraphUtils graphUtils);
 }

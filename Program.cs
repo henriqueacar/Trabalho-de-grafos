@@ -7,9 +7,10 @@ class Program
 {
     public static void Main()
     {
-        var graph = new Graph(0);
+        var graph = new GraphUtils(0);
         var graphType = String.Empty;
         int choice;
+        var grafo = new Grafo();
 
         do
         {
@@ -36,27 +37,21 @@ class Program
                     case 4:
                         Console.WriteLine("Exiting the program. Press Enter to close.");
                         break;
-                    case 5:
-                        var meuGrafo = new Grafo();
-                        int[,] matrizAdjacencia = {
-                            {0, 1, 1, 0},
-                            {1, 0, 0, 1},
-                            {1, 0, 0, 1},
-                            {0, 1, 1, 0}
-                        };
-
-                        meuGrafo.CriarGrafo(matrizAdjacencia);
-                        meuGrafo.ExibirGrafo();
-                        break;
                     default:
                         Console.WriteLine("Invalid choice. Please enter a number between 1 and 4.");
                         continue;
                 }
 
                 graph.ReadGraph($"./../../../{graphType}.txt");
-                graph.DisplayAdjacencyList();
-                graph.DisplayAdjacencyMatrix();
-                graph.DisplayIncidenceTable();
+                
+                var matrizAdjacencia = graph.TransformToAdjacencyMatrix();
+                
+                grafo.CriarGrafo(matrizAdjacencia);
+                grafo.ExibirGrafo();
+                
+                GraphUtils.DisplayAdjacencyList(graph.TransformToAdjacencyList());
+                GraphUtils.DisplayAdjacencyMatrix(graph.TransformToAdjacencyMatrix());
+                GraphUtils.DisplayIncidenceTable(graph.TransformToIncidenceMatrix());
 
                 Console.WriteLine("\nAlgorithm Options:");
                 Console.WriteLine("5. Breadth-First Search (BFS)");

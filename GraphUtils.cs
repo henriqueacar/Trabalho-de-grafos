@@ -2,14 +2,14 @@ using TrabalhoGrafos.Graph.Algorithms;
 
 namespace TrabalhoGrafos.Graph;
 
-public class Graph
+public class GraphUtils
 {
     private int[,] AdjacencyMatrix { get; set; }
     private int[,] IncidenceMatrix { get; set; }
     private int[,] DistanceMatrix { get; set; }
     private List<List<int>> AdjacencyList { get; set; }
 
-    public Graph(int numVertices)
+    public GraphUtils(int numVertices)
     {
         IncidenceMatrix = new int[numVertices, numVertices];
         AdjacencyMatrix = new int[numVertices, numVertices];
@@ -24,14 +24,14 @@ public class Graph
 
 
     // Imprime a lista de adjacência do grafo
-    public void DisplayAdjacencyList()
+    public static void DisplayAdjacencyList(List<List<int>> adjacencyList)
     {
         Console.WriteLine("Adjacency List:");
 
-        for (var i = 0; i < AdjacencyList.Count; i++)
+        for (var i = 0; i < adjacencyList.Count; i++)
         {
             Console.Write($"Vertex {i}: ");
-            foreach (var neighbor in AdjacencyList[i])
+            foreach (var neighbor in adjacencyList[i])
             {
                 Console.Write($"{neighbor} ");
             }
@@ -41,18 +41,18 @@ public class Graph
     }
 
     // Imprime a matriz de adjacência do grafo
-    public void DisplayAdjacencyMatrix()
+    public static void DisplayAdjacencyMatrix(int[,] adjacencyMatrix)
     {
         Console.WriteLine("Incidence Matrix:");
 
-        var rows = AdjacencyMatrix.GetLength(0);
-        var cols = AdjacencyMatrix.GetLength(1);
+        var rows = adjacencyMatrix.GetLength(0);
+        var cols = adjacencyMatrix.GetLength(1);
 
         for (var i = 0; i < rows; i++)
         {
             for (var j = 0; j < cols; j++)
             {
-                Console.Write(AdjacencyMatrix[i, j] + "\t");
+                Console.Write(adjacencyMatrix[i, j] + "\t");
             }
 
             Console.WriteLine();
@@ -60,24 +60,24 @@ public class Graph
     }
 
     // Imprime a tabela de incidência do grafo
-    public void DisplayIncidenceTable()
+    public static void DisplayIncidenceTable(int[,] incidenceMatrix)
     {
         Console.WriteLine("Incidence Table:");
 
         Console.Write("\t");
-        for (var j = 0; j < IncidenceMatrix.GetLength(1); j++)
+        for (var j = 0; j < incidenceMatrix.GetLength(1); j++)
         {
             Console.Write($"({(char)('A' + j)})\t");
         }
 
         Console.WriteLine();
 
-        for (var i = 0; i < IncidenceMatrix.GetLength(0); i++)
+        for (var i = 0; i < incidenceMatrix.GetLength(0); i++)
         {
             Console.Write($"{(char)('A' + i)}\t");
-            for (var j = 0; j < IncidenceMatrix.GetLength(1); j++)
+            for (var j = 0; j < incidenceMatrix.GetLength(1); j++)
             {
-                Console.Write($" {IncidenceMatrix[i, j]}\t");
+                Console.Write($" {incidenceMatrix[i, j]}\t");
             }
 
             Console.WriteLine();
@@ -104,13 +104,13 @@ public class Graph
             DistanceMatrix = new int[numVertices, numVertices];
             AdjacencyList = new List<List<int>>(numVertices);
 
-            for (int i = 0; i < numVertices; i++)
+            for (var i = 0; i < numVertices; i++)
             {
                 var lineValues = sr.ReadLine()?.Split(' ');
 
                 AdjacencyList.Add(new List<int>());
 
-                for (int j = 0; j < numVertices && j < lineValues.Length; j++)
+                for (var j = 0; j < numVertices && j < lineValues.Length; j++)
                 {
                     if (!int.TryParse(lineValues[j], out var value)) 
                         continue;
@@ -139,15 +139,15 @@ public class Graph
     }
     
     // Função para transformar o grafo lido em uma Matriz de Incidência
-    public void TransformToIncidenceMatrix()
+    public int[,] TransformToIncidenceMatrix()
     {
-        int numVertices = IncidenceMatrix.GetLength(0);
-        int numEdges = IncidenceMatrix.GetLength(1);
+        var numVertices = IncidenceMatrix.GetLength(0);
+        var numEdges = IncidenceMatrix.GetLength(1);
 
-        for (int j = 0; j < numEdges; j++)
+        for (var j = 0; j < numEdges; j++)
         {
-            int edgeCount = 0;
-            for (int i = 0; i < numVertices; i++)
+            var edgeCount = 0;
+            for (var i = 0; i < numVertices; i++)
             {
                 if (AdjacencyMatrix[i, j] != 0)
                 {
@@ -163,7 +163,7 @@ public class Graph
 
             if (edgeCount == 1)
             {
-                for (int i = 0; i < numVertices; i++)
+                for (var i = 0; i < numVertices; i++)
                 {
                     if (IncidenceMatrix[i, j] == 1 || IncidenceMatrix[i, j] == -1)
                     {
@@ -172,19 +172,21 @@ public class Graph
                 }
             }
         }
+
+        return IncidenceMatrix;
     }
 
     // Função para transformar grafo lido em um Lista de Adjacência
-    public void TransformToAdjacencyList()
+    public List<List<int>> TransformToAdjacencyList()
     {
-        int numVertices = AdjacencyMatrix.GetLength(0);
+        var numVertices = AdjacencyMatrix.GetLength(0);
         AdjacencyList = new List<List<int>>(numVertices);
 
-        for (int i = 0; i < numVertices; i++)
+        for (var i = 0; i < numVertices; i++)
         {
             AdjacencyList.Add(new List<int>());
 
-            for (int j = 0; j < numVertices; j++)
+            for (var j = 0; j < numVertices; j++)
             {
                 if (AdjacencyMatrix[i, j] != 0)
                 {
@@ -192,21 +194,25 @@ public class Graph
                 }
             }
         }
+
+        return AdjacencyList;
     }
     
     // Função para transformar o grafo lido em uma Matriz de Adjacência
-    public void TransformToAdjacencyMatrix()
+    public int[,] TransformToAdjacencyMatrix()
     {
-        int numVertices = AdjacencyList.Count;
+        var numVertices = AdjacencyList.Count;
         AdjacencyMatrix = new int[numVertices, numVertices];
 
-        for (int i = 0; i < numVertices; i++)
+        for (var i = 0; i < numVertices; i++)
         {
-            foreach (int neighbor in AdjacencyList[i])
+            foreach (var neighbor in AdjacencyList[i])
             {
                 AdjacencyMatrix[i, neighbor] = 1;
             }
         }
+
+        return AdjacencyMatrix;
     }
 
     // Salva o grafo em um txt
