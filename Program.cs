@@ -1,14 +1,16 @@
 ﻿using System.Text;
 using TrabalhoGrafos.Graph;
+using TrabalhoGrafos.Graph.Models;
 
 
 class Program
 {
     public static void Main()
     {
-        var graph = new Graph(0);
+        var graph = new GraphUtils(0);
         var graphType = String.Empty;
         int choice;
+        var grafo = new Grafo();
 
         do
         {
@@ -40,10 +42,16 @@ class Program
                         continue;
                 }
 
-                graph.ReadGraph($"./../../../{graphType}.txt");
-                graph.DisplayAdjacencyList();
-                graph.DisplayAdjacencyMatrix();
-                graph.DisplayIncidenceTable();
+                graph.ReadGraph($"./{graphType}.txt", choice);
+                
+                var matrizAdjacencia = graph.TransformToAdjacencyMatrix();
+                
+                grafo.CriarGrafo(matrizAdjacencia);
+                grafo.ExibirGrafo();
+                
+                GraphUtils.DisplayAdjacencyList(graph.TransformToAdjacencyList(choice));
+                GraphUtils.DisplayAdjacencyMatrix(graph.TransformToAdjacencyMatrix());
+                GraphUtils.DisplayIncidenceTable(graph.TransformToIncidenceMatrix());
 
                 Console.WriteLine("\nAlgorithm Options:");
                 Console.WriteLine("5. Breadth-First Search (BFS)");
@@ -64,29 +72,29 @@ class Program
                         case 5:
                             Console.WriteLine("Choose the initial vertex.");
                             initialVertex = int.Parse(Console.ReadLine());
-                            graph.ExecuteBFS(initialVertex);
+                            graph.ExecuteBFS(initialVertex, grafo);
 
                             break;
                         case 6:
                             Console.WriteLine("Choose the initial vertex.");
                             initialVertex = int.Parse(Console.ReadLine());
-                            graph.ExecuteDFS(initialVertex);
+                            graph.ExecuteDFS(initialVertex, grafo);
 
                             break;
                         case 7:
                             Console.WriteLine("Choose the initial vertex.");
                             initialVertex = int.Parse(Console.ReadLine());
-                            graph.ExecuteDijkstra(initialVertex);
+                            graph.ExecuteDijkstra(initialVertex, grafo);
 
                             break;
                         case 8:
-                            graph.ExecutePrim();
+                            graph.ExecutePrim(grafo);
                             break;
                         case 9:
-                            graph.ExecuteTopologicalSort();
+                            graph.ExecuteTopologicalSort(grafo);
                             break;
                         case 10:
-                            graph.ExecuteEulerianCycle();
+                            graph.ExecuteEulerianCycle(grafo);
                             break;
                         case 11:
                             break;

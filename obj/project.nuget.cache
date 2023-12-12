@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "RuuIsTjU4ewOXqMN34MHWVp6i9iTIfJCwqDsglmtjmwXCTu76j1QYles2ncfhcQeCKZ1upWPeEipGfGOutizZA==",
+  "dgSpecHash": "gjqWxcZjlYnl7HGXaHf9A8XHTcjdIdfhp3Nz/l2tmb5G4U6zUCwQRarUR/otyDNxeznyJv1DGrMrkaNcWGQt2g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\iwest\\RiderProjects\\Trabalho-de-grafos\\TrabalhoGrafos.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\henri\\Documents\\Projetos\\TrabalhoDeGrafos\\Trabalho-de-grafos\\TrabalhoGrafos.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\henri\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\henri\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\henri\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\henri\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
   "logs": []
 }

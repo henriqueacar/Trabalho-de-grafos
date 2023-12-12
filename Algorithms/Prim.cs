@@ -1,14 +1,16 @@
+using TrabalhoGrafos.Graph.Models;
+
 namespace TrabalhoGrafos.Graph.Algorithms;
 
 public class Prim: IGraphAlgorithm
 {
-    public void Execute(Graph graph)
+    public void Execute(Grafo grafo, GraphUtils graphUtils)
     {
         throw new NotImplementedException();
     }
     
     // Not Used
-    public void Execute(Graph graph, int startVertex)
+    public void Execute(Grafo grafo, GraphUtils graphUtils, int startVertex)
     {
         throw new NotImplementedException();
     }
