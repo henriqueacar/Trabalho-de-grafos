@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using TrabalhoGrafos.Graph;
+using TrabalhoGrafos.Graph.Models;
 
 
 class Program
@@ -34,6 +35,18 @@ class Program
                         break;
                     case 4:
                         Console.WriteLine("Exiting the program. Press Enter to close.");
+                        break;
+                    case 5:
+                        var meuGrafo = new Grafo();
+                        int[,] matrizAdjacencia = {
+                            {0, 1, 1, 0},
+                            {1, 0, 0, 1},
+                            {1, 0, 0, 1},
+                            {0, 1, 1, 0}
+                        };
+
+                        meuGrafo.CriarGrafo(matrizAdjacencia);
+                        meuGrafo.ExibirGrafo();
                         break;
                     default:
                         Console.WriteLine("Invalid choice. Please enter a number between 1 and 4.");
