@@ -42,14 +42,14 @@ class Program
                         continue;
                 }
 
-                graph.ReadGraph($"./{graphType}.txt");
+                graph.ReadGraph($"./{graphType}.txt", choice);
                 
                 var matrizAdjacencia = graph.TransformToAdjacencyMatrix();
                 
                 grafo.CriarGrafo(matrizAdjacencia);
                 grafo.ExibirGrafo();
                 
-                GraphUtils.DisplayAdjacencyList(graph.TransformToAdjacencyList());
+                GraphUtils.DisplayAdjacencyList(graph.TransformToAdjacencyList(choice));
                 GraphUtils.DisplayAdjacencyMatrix(graph.TransformToAdjacencyMatrix());
                 GraphUtils.DisplayIncidenceTable(graph.TransformToIncidenceMatrix());
 

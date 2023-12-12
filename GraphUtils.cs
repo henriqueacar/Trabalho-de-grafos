@@ -85,7 +85,7 @@ public class GraphUtils
     }
     
     // Lê o grafo e inicializa a representação
-    public void ReadGraph(string filePath)
+    public void ReadGraph(string filePath, int choice)
     {
         try
         {
@@ -129,7 +129,7 @@ public class GraphUtils
             
             TransformToIncidenceMatrix();
             TransformToAdjacencyMatrix();
-            TransformToAdjacencyList();
+            TransformToAdjacencyList(choice);
             Console.WriteLine("Graph transformado.");
         }
         catch (Exception ex)
@@ -177,7 +177,7 @@ public class GraphUtils
     }
 
     // Função para transformar grafo lido em um Lista de Adjacência
-    public List<List<int>> TransformToAdjacencyList()
+    public List<List<int>> TransformToAdjacencyList(int choice)
     {
         var numVertices = AdjacencyMatrix.GetLength(0);
         AdjacencyList = new List<List<int>>(numVertices);
@@ -187,20 +187,32 @@ public class GraphUtils
             AdjacencyList.Add(new List<int>());
         }
 
-        for(var i = 0; i < numVertices; i++){
-        
-            for (var j = 0; j < numVertices; j++)
-            {
-                if (AdjacencyMatrix[i, j] != 0)
+        if(choice == 1){
+            for(var i = 0; i < numVertices; i++){
+                for (var j = 0; j < numVertices; j++)
                 {
-                    AdjacencyList[i].Add(j);
+                    if (AdjacencyMatrix[i, j] != 0)
+                    {
+                        AdjacencyList[i].Add(j);
                     if(AdjacencyMatrix[j, i] == 0)
-                        AdjacencyList[j].Add(i);
-                }
+                            AdjacencyList[j].Add(i);
+                    }
 
+                }
             }
         }
+        else {
+            for(var i = 0; i < numVertices; i++){
+                for (var j = 0; j < numVertices; j++)
+                {
+                    if (AdjacencyMatrix[i, j] != 0)
+                    {
+                        AdjacencyList[i].Add(j);
+                    }
 
+                }
+            }
+        }
         return AdjacencyList;
     }
     
