@@ -1,4 +1,5 @@
 using TrabalhoGrafos.Graph.Algorithms;
+using TrabalhoGrafos.Graph.Models;
 
 namespace TrabalhoGrafos.Graph;
 
@@ -187,7 +188,7 @@ public class GraphUtils
             AdjacencyList.Add(new List<int>());
         }
 
-        if(choice == 1){
+        if(choice == 1){ //Choice 1 = grafo simples
             for(var i = 0; i < numVertices; i++){
                 for (var j = 0; j < numVertices; j++)
                 {
@@ -261,44 +262,44 @@ public class GraphUtils
     }
     
     // Busca em Largura (Breadth-First Search - BFS)
-    public void ExecuteBFS(int startVertex)
+    public void ExecuteBFS(int startVertex, Grafo grafo)
     {
         var bfs = new BFS();
-        bfs.Execute(this, startVertex);
+        bfs.Execute(grafo, this, startVertex);
     }
 
     // Busca em Profundidade (Depth-First Search - DFS)
-    public void ExecuteDFS(int startVertex)
+    public void ExecuteDFS(int startVertex, Grafo grafo)
     {
         var dfs = new DFS();
-        dfs.Execute(this, startVertex);
+        dfs.Execute(grafo, this, startVertex);
     }
 
     // Prim
-    public void ExecutePrim()
+    public void ExecutePrim(Grafo grafo)
     {
         var prim = new Prim();
-        prim.Execute(this);
+        prim.Execute(grafo, this);
     }
 
     // Dijkstra
-    public void ExecuteDijkstra(int startVertex)
+    public void ExecuteDijkstra(int startVertex, Grafo grafo)
     {
         var dijkstra = new Dijkstra();
-        dijkstra.Execute(this, startVertex);
+        dijkstra.Execute(grafo, this, startVertex);
     }
 
     // Ordenação Topologica
-    public void ExecuteTopologicalSort()
+    public void ExecuteTopologicalSort(Grafo grafo)
     {
         var topologicalSort = new TopologicalSort();
-        topologicalSort.Execute(this);
+        topologicalSort.Execute(grafo, this);
     }
 
     // Ciclo Euleriano
-    public void ExecuteEulerianCycle()
+    public void ExecuteEulerianCycle(Grafo grafo)
     {
         var eulerianCycle = new EulerianCycle();
-        eulerianCycle.Execute(this); 
+        eulerianCycle.Execute(grafo, this); 
     }
 }
