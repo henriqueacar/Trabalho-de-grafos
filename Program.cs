@@ -29,7 +29,7 @@ class Program
                         graphType = "GrafoSimples";
                         break;
                     case 2:
-                        graphType = "DigrafoSimples";
+                        graphType = "GrafoSimplesValorado";
                         break;
                     case 3:
                         graphType = "DigrafoSimplesValorado";
@@ -42,15 +42,14 @@ class Program
                         continue;
                 }
 
-                graph.ReadGraph($"./{graphType}.txt", choice);
+                graph.ReadGraph($"./../../../{graphType}.txt", choice);
                 
-                var matrizAdjacencia = graph.TransformToAdjacencyMatrix();
+                // var matrizAdjacencia = graph.TransformToAdjacencyMatrix();
                 
-                grafo.CriarGrafo(matrizAdjacencia);
+                grafo.CriarGrafo(graph.AdjacencyMatrix);
                 grafo.ExibirGrafo();
-                
                 GraphUtils.DisplayAdjacencyList(graph.TransformToAdjacencyList(choice));
-                GraphUtils.DisplayAdjacencyMatrix(graph.TransformToAdjacencyMatrix());
+                GraphUtils.DisplayAdjacencyMatrix(graph.TransformToDistanceMatrix());
                 GraphUtils.DisplayIncidenceTable(graph.TransformToIncidenceMatrix());
 
                 Console.WriteLine("\nAlgorithm Options:");
@@ -73,7 +72,7 @@ class Program
                             Console.WriteLine("Choose the initial vertex.");
                             initialVertex = int.Parse(Console.ReadLine());
                             graph.ExecuteBFS(initialVertex, grafo);
-
+                            
                             break;
                         case 6:
                             Console.WriteLine("Choose the initial vertex.");

@@ -10,7 +10,7 @@ public class TopologicalSort: IGraphAlgorithm
     }
     
     // Not Used
-    public void Execute(Grafo grafo, GraphUtils graphUtils, int startVertex)
+    public void Execute(Grafo grafo, int startVertex)
     {
         throw new NotImplementedException();
     }
