@@ -5,6 +5,7 @@ public class Vertice
     public string Name { get; set; }
     public List<Aresta> Arestas { get; set; }
     public Vertice Pai { get; set; }
+    public string Cor { get; set; } = "branco";
 
     public Vertice(string nome)
     {
