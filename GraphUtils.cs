@@ -31,7 +31,7 @@ public class GraphUtils
 
         for (var i = 0; i < adjacencyList.Count; i++)
         {
-            Console.Write($"Vertex {i+1} -> ");
+            Console.Write($"Vertex {i} -> ");
 
             if (adjacencyList[i].Count == 0)
             {
@@ -334,7 +334,7 @@ public class GraphUtils
     }
 
     // Método para pegar o peso da aresta entre dois vértices
-    private int GetEdgeWeight(int vertex1, int vertex2)
+    public int GetEdgeWeight(int vertex1, int vertex2)
     {
         return AdjacencyMatrix[vertex1, vertex2];
     }
@@ -388,10 +388,10 @@ public class GraphUtils
     }
 
     // Dijkstra
-    public void ExecuteDijkstra(int startVertex, Grafo grafo)
+    public void ExecuteDijkstra(int[,] grafo, int src)
     {
         var dijkstra = new Dijkstra();
-        dijkstra.Execute(grafo, startVertex);
+        dijkstra.Execute(grafo, src);
     }
 
     // Ordenação Topologica
