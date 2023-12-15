@@ -2,15 +2,8 @@ namespace TrabalhoGrafos.Graph.Models;
 
 public class Grafo
 {
-    public List<Vertice> Vertices;
-    public List<Aresta> Arestas;
-
-
-    public Grafo()
-    {
-        Vertices = new List<Vertice>();
-        Arestas = new List<Aresta>();
-    }
+    public List<Vertice> Vertices = new();
+    public List<Aresta> Arestas = new();
 
     public void CriarGrafo(int[,] matriz)
     {
@@ -21,7 +14,7 @@ public class Grafo
         {
             // Cria todos os vertices
             // Cria um vertice com nome i + 1 para facilitar a leitura
-            var vertice = new Vertice($"{i + 1}")
+            var vertice = new Vertice($"{i}")
             {
                 // E adiciona uma lista de arestas que incidem nele
                 Arestas = new List<Aresta>()
@@ -39,7 +32,7 @@ public class Grafo
                 if (matriz[i, j] > 0 && matriz[i, j] < 999)
                 {
                     // Cria uma aresta com o vertice de "origem" e "destino" 
-                    var aresta = new Aresta(Vertices[i], Vertices[j]);
+                    var aresta = new Aresta(Vertices[i], Vertices[j], matriz[i,j]);
 
                     // Verifica se a aresta já existe
                     if (!Arestas.Contains(aresta))
@@ -71,6 +64,7 @@ public class Grafo
                     Console.Write(", ");
                 }
             }
+
             Console.WriteLine();
         }
 

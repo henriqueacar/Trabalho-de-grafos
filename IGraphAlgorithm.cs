@@ -6,4 +6,5 @@ public interface IGraphAlgorithm
 {
     void Execute(Grafo grafo, int startVertex);
     void Execute(Grafo grafo, GraphUtils graphUtils);
+    
 }

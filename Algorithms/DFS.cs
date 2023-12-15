@@ -43,7 +43,12 @@ public class DFS: IGraphAlgorithm
         }
         Console.WriteLine("\n");
     }
-    
+
+    public void Execute(Grafo grafo, int startVertex, int finalVertex)
+    {
+        throw new NotImplementedException();
+    }
+
     // Not Used
     public void Execute(Grafo grafo, GraphUtils graphUtils)
     {

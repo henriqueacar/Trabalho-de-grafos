@@ -4,6 +4,11 @@ namespace TrabalhoGrafos.Graph.Algorithms;
 
 public class Prim: IGraphAlgorithm
 {
+    public void Execute(Grafo grafo, int startVertex, int finalVertex)
+    {
+        throw new NotImplementedException();
+    }
+
     public void Execute(Grafo grafo, GraphUtils graphUtils)
     {
         throw new NotImplementedException();
