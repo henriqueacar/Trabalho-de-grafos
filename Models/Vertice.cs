@@ -6,18 +6,14 @@ public class Vertice
     public List<Aresta> Arestas { get; set; }
     public Vertice Pai { get; set; }
     public string Cor { get; set; } = "branco";
+    public List<Vertice> Vizinhos { get; set; }
 
     public Vertice(string nome)
     {
         Name = nome;
+        Vizinhos = new List<Vertice>();
     }
-
-    public Vertice(string nome, List<Aresta> arestas)
-    {
-        Arestas = arestas;
-        Name = nome;
-    }
-
+    
     public override string ToString()
     {
         return Name;

@@ -3,59 +3,50 @@ using TrabalhoGrafos.Graph.Models;
 
 namespace TrabalhoGrafos.Graph.Algorithms;
 
-public class BFS : IGraphAlgorithm
+public class BFS
 {
     public void Execute(Grafo grafo, int startVertex)
     {
         // Cria uma lista com a ordem de vertices visitados
         var ordemDeVisita = new List<Vertice>();
-        
+
         // Cria uma fila 
         var fila = new Queue<Vertice>();
 
-        // Pra ajudar na hora de inserir o vertice inicial no console
-        if (startVertex > 0)
-        {
-            startVertex -= 1;
-        }
         // Pega o vertice do grafo referente ao vertice inicial escolhido
         var inicio = grafo.Vertices[startVertex];
-        // Atribui a cor cinza pro vertice. Cinza quer dizer que passou
-        inicio.Cor = "cinza";
+
         // Adiciona o inicio a fila
         fila.Enqueue(inicio);
-
-        // Enqanto a fila tiver mais de 0 elementos
+        
         while (fila.Count > 0)
         {
-            // Remove o primeiro elemento da fila e atruibui a variavel do vertice atual
-            Vertice atual = fila.Dequeue();
-            // Adiciona na ordem de visita dos vertices
-            ordemDeVisita.Add(atual);
-
-            // Pra cada aresta do vertice atual
-            foreach (var aresta in atual.Arestas)
+            // Pega o próximo vertice da fila
+            var verticeAtual = fila.Dequeue();
+            switch (verticeAtual.Cor)
             {
-                // Pega o vertice vizinho a esquerda do atual
-                Vertice vizinho = aresta.LeftVertice;
+                case "preto": // Já visitado
+                    continue;
+            }
 
-                // Se o vizinho da esquerda foi igual o atual, pega o da direita
-                if (aresta.LeftVertice == atual)
-                {
-                    vizinho = aresta.RightVertice;
-                }
+            // Atribui a cor cinza pro vertice. Cinza quer dizer que passou
+            verticeAtual.Cor = "cinza";
 
-                // Verifica se o vizinho não foi visitado/pintado, ou seja, a cor ainda é "branco"
+            foreach (var vizinho in verticeAtual.Vizinhos)
+            {
                 if (vizinho.Cor.Equals("branco"))
                 {
+                    // Marca como visitado
                     vizinho.Cor = "cinza";
-                    // Se for branco, pinta ele de cinza e adiciona ele na fila
+                    // Adiciona o vizinho como próximo vertice da fila
                     fila.Enqueue(vizinho);
                 }
             }
-            
-            // Pinta ele de preto
-            atual.Cor = "preto";
+
+            // Pinta o vértice atual de preto após visitar todos os vizinhos
+            verticeAtual.Cor = "preto";
+
+            ordemDeVisita.Add(verticeAtual);
         }
 
         Console.Write($"Ordem de vertices: ");
@@ -65,16 +56,5 @@ public class BFS : IGraphAlgorithm
         }
 
         Console.WriteLine();
-    }
-
-    public void Execute(Grafo grafo, int startVertex, int finalVertex)
-    {
-        throw new NotImplementedException();
-    }
-
-    // Not Used
-    public void Execute(Grafo grafo, GraphUtils graphUtils)
-    {
-        throw new NotImplementedException();
     }
 }

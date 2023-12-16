@@ -53,31 +53,31 @@ public class Dijkstra
             }
         }
         // Imprime o caminho mai curto
-        Print(distancias, caminhoMaisCurto, numVertices);
+        Print(distancias, caminhoMaisCurto, src, numVertices);
     }
-    private static void Print(int[] distancia, int[] caminhoMaisCurto, int numVertices)
+    private static void Print(int[] distancias, int[] caminhoMaisCurto, int src, int numVertices)
     {
-        var ultimoVertice = numVertices - 1;
-        Console.Write($"O comprimento do caminho mais curto é {distancia[ultimoVertice]}: ");
+        Console.WriteLine("Caminhos mínimos a partir do vértice inicial:");
     
-        if (distancia[ultimoVertice] == int.MaxValue)
+        for (var i = 0; i < numVertices; ++i)
         {
-            Console.WriteLine("Não existe caminho");
-            return;
+            if (i != src)
+            {
+                Console.Write($"{src}-{i}: ");
+                PegarCaminho(caminhoMaisCurto, i);
+                Console.WriteLine($" ({distancias[i]})");
+            }
         }
-
-        PegarCaminho(caminhoMaisCurto, ultimoVertice);
-        Console.WriteLine();
     }
 
-    private static void PegarCaminho(int[] verticesVisitados, int vertice)
+    private static void PegarCaminho(int[] caminhoMaisCurto, int vertice)
     {
         if (vertice == -1)
             return;
 
-        PegarCaminho(verticesVisitados, verticesVisitados[vertice]);
+        PegarCaminho(caminhoMaisCurto, caminhoMaisCurto[vertice]);
 
-        if (verticesVisitados[vertice] != -1)
+        if (caminhoMaisCurto[vertice] != -1)
             Console.Write($" -> {vertice}");
         else
             Console.Write($"{vertice}");

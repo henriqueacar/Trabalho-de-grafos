@@ -169,9 +169,6 @@ public class GraphUtils
             TransformToDistanceMatrix();
             // Uma lista de adjacencia
             TransformToAdjacencyList(choice);
-
-            Console.WriteLine("Graph read successfully from the file.");
-            Console.WriteLine("Graph transformed.");
         }
         catch (Exception ex)
         {
@@ -398,7 +395,7 @@ public class GraphUtils
     public void ExecuteTopologicalSort(Grafo grafo)
     {
         var topologicalSort = new TopologicalSort();
-        topologicalSort.Execute(grafo, this);
+        topologicalSort.Execute(grafo);
     }
 
     // Ciclo Euleriano

@@ -2,21 +2,68 @@ using TrabalhoGrafos.Graph.Models;
 
 namespace TrabalhoGrafos.Graph.Algorithms;
 
-public class TopologicalSort: IGraphAlgorithm
+public class TopologicalSort
 {
-    public void Execute(Grafo grafo, int startVertex, int finalVertex)
+    List<Vertice> vertices;
+    Stack<Vertice> ordem;
+
+    public void Execute(Grafo grafo)
     {
-        throw new NotImplementedException();
+        vertices = grafo.Vertices;
+        var numVertices = vertices.Count;
+        ordem = new Stack<Vertice>();
+
+        for (var i = 0; i < numVertices; i++)
+        {
+            if (vertices[i].Cor.Equals("branco"))
+            {
+                if (!BuscaEmProfudidade(i))
+                {
+                    Console.WriteLine("Graph contains a cycle!");
+                    return;
+                }
+
+                BuscaEmProfudidade(i);
+            }
+        }
+        
+        Console.WriteLine("Ordenação topologica: ");
+        foreach (var v in ordem)
+        {
+            Console.Write($"{v.Name} ");
+        }
+
+        Console.WriteLine();
     }
 
-    public void Execute(Grafo grafo, GraphUtils graphUtils)
+    private bool BuscaEmProfudidade(int index)
     {
-        throw new NotImplementedException();
-    }
-    
-    // Not Used
-    public void Execute(Grafo grafo, int startVertex)
-    {
-        throw new NotImplementedException();
+        var verticeAtual = vertices[index];
+
+        switch (verticeAtual.Cor)
+        {
+            case "preto": // Já visitado
+                return true;
+
+            case "cinza": // Ciclo
+                return false;
+        }
+
+        verticeAtual.Cor = "cinza";
+
+        foreach (var vizinho in verticeAtual.Vizinhos)
+        {
+            // Procura se tem um ciclo
+            if (!BuscaEmProfudidade(vertices.IndexOf(vizinho)))
+            {
+                return false;
+            }
+        }
+
+        verticeAtual.Cor = "preto";
+        
+        ordem.Push(verticeAtual);
+
+        return true;
     }
 }
