@@ -42,7 +42,7 @@ class Program
                         continue;
                 }
 
-                graph.ReadGraph($"C:/Users/henri/Documents/Projetos/TrabalhoDeGrafos/Trabalho-de-grafos/{graphType}.txt", choice);
+                graph.ReadGraph($"./../../../{graphType}.txt", choice);
                 
                 var matrizAdjacencia = graph.TransformToAdjacencyMatrix();
                 
