@@ -43,7 +43,7 @@ public class EulerianCycle: IGraphAlgorithm
             //do vertice atual
             var vizinho = aresta.LeftVertice == vertice ? 
                     aresta.RightVertice : aresta.LeftVertice;
-            //se o vizinho for o vertice inicial, pula iteraçao para proxima aresta
+            //se o vizinho for o vertice inicial, pula iteraçao para proxima
             if(vizinho == verticeInicial)
                 continue;
             vizinho.Arestas.Remove(aresta);
