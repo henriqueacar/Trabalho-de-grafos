@@ -7,6 +7,8 @@ public class EulerianCycle: IGraphAlgorithm
     public void Execute(Grafo grafo, GraphUtils graphUtils)
     {
         //Nao funciona com grafo desconexo
+
+        //Lista de arestas visitadas
         var cicloEuleriano = new List<Aresta>();
 
         if(!ChecaCondicaoCicloEuleriano(grafo)){
@@ -14,10 +16,12 @@ public class EulerianCycle: IGraphAlgorithm
             return; //não sei bem como interromper a operação caso nao haja ciclo
         }
 
-        Vertice verticeInicial = grafo.Vertices[0]; //vertice para iniciar busca pelo ciclo        
+        //Vertice para iniciar busca pelo ciclo
+        Vertice verticeInicial = grafo.Vertices[0];         
 
         BuscaCicloEuleriano(grafo, verticeInicial, cicloEuleriano);
 
+        //Imprimindo a lista de arestas
         Console.WriteLine("\nArestas:");
         foreach(var aresta in cicloEuleriano){
             Console.Write($"({aresta.LeftVertice},{aresta.RightVertice})");
@@ -29,6 +33,9 @@ public class EulerianCycle: IGraphAlgorithm
     public void BuscaCicloEuleriano(Grafo grafo, Vertice vertice, 
     List<Aresta> cicloEuleriano)
     {
+        //Checagem de controle com o vértice inicial do grafo
+        var verticeInicial = grafo.Vertices[0];
+
         foreach(var aresta in vertice.Arestas.ToList()){
             //checa as arestas na lista de arestas do vertice atual
             vertice.Arestas.Remove(aresta);
@@ -36,6 +43,9 @@ public class EulerianCycle: IGraphAlgorithm
             //do vertice atual
             var vizinho = aresta.LeftVertice == vertice ? 
                     aresta.RightVertice : aresta.LeftVertice;
+            //se o vizinho for o vertice inicial, pula iteraçao para proxima aresta
+            if(vizinho == verticeInicial)
+                continue;
             vizinho.Arestas.Remove(aresta);
             //Se a lista do cicloEuleriano não contem a aresta atual, adiciona ela
             if(!cicloEuleriano.Contains(aresta))
