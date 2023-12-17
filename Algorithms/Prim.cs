@@ -4,8 +4,8 @@ namespace TrabalhoGrafos.Graph.Algorithms;
 
 public class Prim: IGraphAlgorithm
 {
-        public void Execute(Grafo grafo, GraphUtils graphUtils)
-    { //Peso total da arvore
+        public void Execute(Grafo grafo, GraphUtils graphUtils){ 
+            //Peso total da arvore
         int pesoTotal = 0;
         //Arestas que fazem parte da arvore
         var arestasArvorePrim = new List<Aresta>();
