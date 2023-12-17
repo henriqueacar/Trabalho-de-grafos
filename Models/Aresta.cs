@@ -11,7 +11,6 @@ public class Aresta
         LeftVertice = leftVertice;
         RightVertice = rightVertice;
     }
-
     public Aresta(Vertice leftVertice, Vertice rightVertice, int peso)
     {
         LeftVertice = leftVertice;
