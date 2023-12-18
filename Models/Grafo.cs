@@ -43,35 +43,4 @@ public class Grafo
 
         return grafo;
     }
-    
-    public void ExibirGrafo()
-    {
-        Console.WriteLine("Vértices:");
-        foreach (var vertice in Vertices)
-        {
-            Console.Write($"{vertice.Name}: ");
-
-            var arestaCount = vertice.Arestas.Count;
-            for (var i = 0; i < arestaCount; i++)
-            {
-                var aresta = vertice.Arestas[i];
-                Console.Write($"({aresta.LeftVertice},{aresta.RightVertice})");
-
-                if (i < arestaCount - 1)
-                {
-                    Console.Write(", ");
-                }
-            }
-
-            Console.WriteLine();
-        }
-
-        Console.WriteLine("\nArestas:");
-        foreach (var aresta in Arestas)
-        {
-            Console.WriteLine($"{aresta.LeftVertice} - {aresta.RightVertice}");
-        }
-
-        Console.WriteLine($"Número de vertices: {Vertices.Count}");
-    }
 }

@@ -46,7 +46,7 @@ class Program
 
                 Console.WriteLine("\nOperações:");
                 Console.WriteLine("5. Transformar em Matriz de Incidência");
-                Console.WriteLine("6. Transformar em Matriz de Distancia");
+                Console.WriteLine("6. Transformar em Matriz de Adjacencia/Distancia");
                 Console.WriteLine("7. Transformar em Lista de Adjacencia");
                 Console.WriteLine("8. Busca em Largura (BFS)");
                 Console.WriteLine("9. Busca em Profundidade (DFS)");
@@ -60,22 +60,34 @@ class Program
                 if (int.TryParse(Console.ReadLine(), out choiceTwo))
                 {
                     var initialVertex = new int();
-                    var finalVertex = new int();
 
                     switch (choiceTwo)
                     {
                         case 5:
-                            GraphUtils.DisplayIncidenceTable(graph.TransformToIncidenceMatrix());
+                            var matrizIncidencia = graph.TransformToIncidenceMatrix();
+                            GraphUtils.DisplayIncidenceTable(matrizIncidencia);
+                            GraphUtils.SalvarMatriz("Matriz_Incidencia_Output.txt", matrizIncidencia);
+                            GraphUtils.SalvarTabelaIncidencia("Tabela_Incidencia_Output.txt", matrizIncidencia);
                             break;
-                        
+
                         case 6:
-                            GraphUtils.DisplayAdjacencyMatrix(graph.TransformToDistanceMatrix());
+                            var matrizDistancia = graph.TransformToDistanceMatrix();
+                            GraphUtils.DisplayAdjacencyMatrix(matrizDistancia);
+                            if (choice == 3)
+                            {
+                                GraphUtils.SalvarMatriz("Matriz_Distancias_Output.txt", matrizDistancia);
+                                break;
+                            } 
+
+                            GraphUtils.SalvarMatriz("Matriz_Adjacencia_Output.txt", matrizDistancia);
                             break;
-                        
+
                         case 7:
-                            GraphUtils.DisplayAdjacencyList(graph.TransformToAdjacencyList(choice));
+                            var listaDistancia = graph.TransformToAdjacencyList(choice);
+                            GraphUtils.DisplayAdjacencyList(listaDistancia);
+                            GraphUtils.SalvarLista("Lista_Adjacencia_Output.txt", listaDistancia);
                             break;
-                        
+
                         case 8:
                             Console.WriteLine("Escolha o vertice inicial");
 
@@ -120,6 +132,7 @@ class Program
             {
                 Console.WriteLine("Número inválido");
             }
+
             graph = new GraphUtils(0);
             grafo = new Grafo();
         } while (choice != 99);

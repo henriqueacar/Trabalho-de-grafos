@@ -6,9 +6,9 @@ namespace TrabalhoGrafos.Graph;
 public class GraphUtils
 {
     public int[,] AdjacencyMatrix { get; set; }
-    private int[,] IncidenceMatrix { get; set; }
-    private int[,] DistanceMatrix { get; set; }
-    private List<List<int>> AdjacencyList { get; set; }
+    public int[,] IncidenceMatrix { get; set; }
+    public int[,] DistanceMatrix { get; set; }
+    public List<List<int>> AdjacencyList { get; set; }
     private const int ArcoInexistente = 999;
 
     public GraphUtils(int numVertices)
@@ -27,7 +27,7 @@ public class GraphUtils
 
     public static void DisplayAdjacencyList(List<List<int>> adjacencyList)
     {
-        Console.WriteLine("Adjacency List:");
+        Console.WriteLine("Lista Adjacencia:");
 
         for (var i = 0; i < adjacencyList.Count; i++)
         {
@@ -35,7 +35,7 @@ public class GraphUtils
 
             if (adjacencyList[i].Count == 0)
             {
-                Console.Write("No neighbors");
+                Console.Write("Sem vizinhos");
             }
             else
             {
@@ -51,7 +51,7 @@ public class GraphUtils
 
     public static void DisplayAdjacencyMatrix(int[,] adjacencyMatrix)
     {
-        Console.WriteLine("Adjacency Matrix:");
+        Console.WriteLine("Matriz de Adjacencia:");
 
         var rows = adjacencyMatrix.GetLength(0);
         var cols = adjacencyMatrix.GetLength(1);
@@ -69,7 +69,7 @@ public class GraphUtils
 
     public static void DisplayIncidenceTable(int[,] incidenceMatrix)
     {
-        Console.WriteLine("Incidence Table:");
+        Console.WriteLine("Tabela de Incidencia:");
 
         Console.Write("\t");
         for (var j = 0; j < incidenceMatrix.GetLength(1); j++)
@@ -102,7 +102,7 @@ public class GraphUtils
 
             if (numVertices <= 0)
             {
-                Console.WriteLine("Invalid number of vertices in the file.");
+                Console.WriteLine("Número inválido de vertices nesse arquivo.");
                 return;
             }
 
@@ -124,7 +124,7 @@ public class GraphUtils
                 {
                     if (!int.TryParse(lineValues[j], out var value))
                     {
-                        Console.WriteLine($"Invalid value at row {i}, column {j}: {lineValues[j]}");
+                        Console.WriteLine($"Valor inválido na linha {i}, coluna {j}: {lineValues[j]}");
                         value = ArcoInexistente;
                     }
 
@@ -146,11 +146,11 @@ public class GraphUtils
                         case 3: // Grafo Direcionado Valorado
                             AdjacencyMatrix[i, j] = value;
                             IncidenceMatrix[i, j] = value;
-                            DistanceMatrix[i, j] = (i == j) ? 0 : 999;
+                            DistanceMatrix[i, j]  = (i == j) ? 0 : (value == 0) ? 999 : value;
                             break;
 
                         default:
-                            Console.WriteLine("Invalid graph type.");
+                            Console.WriteLine("Grafo invalido.");
                             return;
                     }
 
@@ -162,7 +162,7 @@ public class GraphUtils
             }
 
             // Transforma o grafo lido (matriz de adjacencia ou matriz de distancias) em
-            
+
             // Uma matriz de incidencia 
             TransformToIncidenceMatrix();
             // Uma matriz de distancia
@@ -191,7 +191,6 @@ public class GraphUtils
             // E pra cada vertice
             for (var i = 0; i < numVertices; i++)
             {
-                
                 if (AdjacencyMatrix[i, j] != 0) // Se o elemento i,j da matriz for diferente de 0
                 {
                     // Adiciona 1 ao elemento i,j da matriz de incidencia 
@@ -331,40 +330,115 @@ public class GraphUtils
     }
 
     // Método para pegar o peso da aresta entre dois vértices
-    public int GetEdgeWeight(int vertex1, int vertex2)
+    private int GetEdgeWeight(int vertex1, int vertex2)
     {
         return AdjacencyMatrix[vertex1, vertex2];
     }
 
-    // Salva o grafo em um txt
-    public void SaveGraph(string filePath)
+    public static void SalvarMatriz(string fileName, int[,] matrix)
     {
+        const string path = @"C:\Users\iwest\RiderProjects\Trabalho-de-grafos\Outputs";
+        var filePath = Path.Combine(path, fileName);
+        
+        using var sw = new StreamWriter(filePath);
+
         try
         {
-            using var sw = new StreamWriter(filePath);
-
-            sw.WriteLine(AdjacencyList.Count);
-
-            for (var i = 0; i < AdjacencyMatrix.GetLength(0); i++)
+            for (var i = 0; i < matrix.GetLength(0); i++)
             {
-                for (var j = 0; j < AdjacencyMatrix.GetLength(1); j++)
+                for (var j = 0; j < matrix.GetLength(1); j++)
                 {
-                    sw.Write($"{AdjacencyMatrix[i, j]} ");
+                    sw.Write(matrix[i, j] + "\t");
                 }
 
                 sw.WriteLine();
             }
-
-            Console.WriteLine("Graph saved successfully to the file.");
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            Console.WriteLine($"An error occurred while saving the graph: {ex.Message}");
+            Console.WriteLine(e);
+            throw;
+        }
+
+        Console.WriteLine("foi");
+    }    
+    public static void SalvarTabelaIncidencia(string fileName, int[,] matrix)
+    {
+        const string path = @"C:\Users\iwest\RiderProjects\Trabalho-de-grafos\Outputs";
+        var filePath = Path.Combine(path, fileName);
+
+        using var sw = new StreamWriter(filePath);
+
+        sw.Write("\t");
+        for (var j = 0; j < matrix.GetLength(1); j++)
+        {
+            sw.Write($"({(char)('A' + j)})\t");
+        }
+
+        sw.WriteLine();
+
+        for (var i = 0; i < matrix.GetLength(0); i++)
+        {
+            sw.Write($"{(char)('A' + i)}\t");
+            for (var j = 0; j < matrix.GetLength(1); j++)
+            {
+                sw.Write($" {matrix[i, j]}\t");
+            }
+
+            sw.WriteLine();
         }
     }
 
+    public static void SalvarLista(string fileName, List<List<int>> list)
+    {
+        const string path = @"C:\Users\iwest\RiderProjects\Trabalho-de-grafos\Outputs";
+        var filePath = Path.Combine(path, fileName);
+        
+        using var sw = new StreamWriter(filePath);
+        
+        for (var i = 0; i < list.Count; i++)
+        {
+            sw.Write($"Vertice {i}: ");
+            foreach (var item in list[i])
+            {
+                sw.Write(item + " ");
+            }
+
+            sw.WriteLine();
+        }
+
+        Console.WriteLine("foi");
+    }
+
+    // Salva o grafo em um txt
+    // public void SaveGraph(string filePath)
+    // {
+    //     try
+    //     {
+    //         using var sw = new StreamWriter(filePath);
+    //
+    //         sw.WriteLine(AdjacencyList.Count);
+    //
+    //         for (var i = 0; i < AdjacencyMatrix.GetLength(0); i++)
+    //         {
+    //             for (var j = 0; j < AdjacencyMatrix.GetLength(1); j++)
+    //             {
+    //                 sw.Write($"{AdjacencyMatrix[i, j]} ");
+    //             }
+    //
+    //             sw.WriteLine();
+    //         }
+    //
+    //         Console.WriteLine("Graph saved successfully to the file.");
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         Console.WriteLine($"An error occurred while saving the graph: {ex.Message}");
+    //     }
+    // }
+
     // Busca em Largura (Breadth-First Search - BFS)
-    public void ExecuteBFS(int startVertex,  Grafo grafo)
+    public void ExecuteBFS(int startVertex, Grafo grafo)
     {
         var bfs = new BFS();
         bfs.Execute(grafo, startVertex);
@@ -381,7 +455,7 @@ public class GraphUtils
     public void ExecutePrim(Grafo grafo)
     {
         var prim = new Prim();
-        prim.Execute(grafo, this);
+        prim.Execute(grafo);
     }
 
     // Dijkstra
@@ -402,6 +476,6 @@ public class GraphUtils
     public void ExecuteEulerianCycle(Grafo grafo)
     {
         var eulerianCycle = new EulerianCycle();
-        eulerianCycle.Execute(grafo, this);
+        eulerianCycle.Execute(grafo);
     }
 }
