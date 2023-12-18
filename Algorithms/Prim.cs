@@ -61,10 +61,11 @@ public class Prim: IGraphAlgorithm
             Console.Write($"({aresta.LeftVertice},{aresta.RightVertice})");
         }
         Console.WriteLine($"\nPeso:{pesoTotal}\n");
+
     }
     
     // Not Used
-    public void Execute(Grafo grafo, GraphUtils graphUtils, int startVertex)
+    public void Execute(Grafo grafo, int startVertex)
     {
         throw new NotImplementedException();
     }

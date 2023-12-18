@@ -4,13 +4,18 @@ namespace TrabalhoGrafos.Graph.Algorithms;
 
 public class TopologicalSort: IGraphAlgorithm
 {
+    public void Execute(Grafo grafo, int startVertex, int finalVertex)
+    {
+        throw new NotImplementedException();
+    }
+
     public void Execute(Grafo grafo, GraphUtils graphUtils)
     {
         throw new NotImplementedException();
     }
     
     // Not Used
-    public void Execute(Grafo grafo, GraphUtils graphUtils, int startVertex)
+    public void Execute(Grafo grafo, int startVertex)
     {
         throw new NotImplementedException();
     }

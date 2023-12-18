@@ -4,7 +4,7 @@ namespace TrabalhoGrafos.Graph.Algorithms;
 
 public class DFS: IGraphAlgorithm
 {
-    public void Execute(Grafo grafo, GraphUtils graphUtils, int startVertex)
+    public void Execute(Grafo grafo, int startVertex)
     {
         //Cria cópia do grafo
         Grafo copia = grafo;
@@ -49,6 +49,11 @@ public class DFS: IGraphAlgorithm
             Console.Write($"{vertice}");
         }
         Console.WriteLine("\n");
+    }
+
+    public void Execute(Grafo grafo, int startVertex, int finalVertex)
+    {
+        throw new NotImplementedException();
     }
 
     // Not Used
