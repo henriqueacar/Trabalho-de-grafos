@@ -6,13 +6,19 @@ public class DFS: IGraphAlgorithm
 {
     public void Execute(Grafo grafo, int startVertex)
     {
+        //Cria cópia do grafo
         Grafo copia = grafo;
+        //Cria lista de vertices visitados pelo algoritmo
         List<Vertice> verticesVisitados = new List<Vertice>();
-        Stack<Vertice> pilha = new Stack<Vertice>(); //pilha para controlar ordem de visita
+        //Pilha para controlar ordem de visita
+        Stack<Vertice> pilha = new Stack<Vertice>(); 
+
+        //Limpa informação de visitação colocando o Pai de cada vertice como null
         foreach(Vertice v in copia.Vertices){
-            v.Pai = null; //limpa informação de visitação
+            v.Pai = null; 
         }
 
+        //Coloca o vertice inicial na pilha
         pilha.Push(copia.Vertices[startVertex]);
 
         while (pilha.Count > 0){
@@ -36,7 +42,8 @@ public class DFS: IGraphAlgorithm
                 }
             }
         }
-
+        
+        //Imprime a lista de vertices visitados
         Console.WriteLine("\nVertices visitados:");
         foreach(var vertice in verticesVisitados){
             Console.Write($"{vertice}");
