@@ -1,24 +1,26 @@
 ﻿using System.Text;
 using TrabalhoGrafos.Graph;
+using TrabalhoGrafos.Graph.Models;
 
 
 class Program
 {
     public static void Main()
     {
-        var graph = new Graph(0);
+        var graph = new GraphUtils(0);
         var graphType = String.Empty;
-        int choice;
+        int choice, choiceTwo;
+        var grafo = new Grafo();
 
         do
         {
-            Console.WriteLine("Menu:");
-            Console.WriteLine("1. Simple Graph");
-            Console.WriteLine("2. Simple Digraph");
-            Console.WriteLine("3. Valued Simple Digraph");
+            Console.WriteLine("Menu");
+            Console.WriteLine("1. Grafo Simples Não Valorado");
+            Console.WriteLine("2. Grafo Simples Valorado");
+            Console.WriteLine("3. Grafo Direcionado Valorado");
             Console.WriteLine("4. Exit");
 
-            Console.Write("Enter your choice (1-4): ");
+            Console.Write("Escolha um número (1-4)");
             if (int.TryParse(Console.ReadLine(), out choice))
             {
                 switch (choice)
@@ -27,83 +29,112 @@ class Program
                         graphType = "GrafoSimples";
                         break;
                     case 2:
-                        graphType = "DigrafoSimples";
+                        graphType = "GrafoSimplesValorado";
                         break;
                     case 3:
                         graphType = "DigrafoSimplesValorado";
                         break;
                     case 4:
-                        Console.WriteLine("Exiting the program. Press Enter to close.");
+                        Console.WriteLine("Saindo");
                         break;
                     default:
-                        Console.WriteLine("Invalid choice. Please enter a number between 1 and 4.");
+                        Console.WriteLine("Número inválido. Escolha um número(1-4)");
                         continue;
                 }
 
-                graph.ReadGraph($"./../../../{graphType}.txt");
-                graph.DisplayAdjacencyList();
-                graph.DisplayAdjacencyMatrix();
-                graph.DisplayIncidenceTable();
+                graph.ReadGraph($"./../../../{graphType}.txt", choice);
 
-                Console.WriteLine("\nAlgorithm Options:");
-                Console.WriteLine("5. Breadth-First Search (BFS)");
-                Console.WriteLine("6. Depth-First Search (DFS)");
-                Console.WriteLine("7. Prim's Algorithm");
-                Console.WriteLine("8. Dijkstra's Algorithm");
-                Console.WriteLine("9. Topological Sort");
-                Console.WriteLine("10. Eulerian Cycle");
-                Console.WriteLine("11. Back to Main Menu");
+                Console.WriteLine("\nOperações:");
+                Console.WriteLine("5. Transformar em Matriz de Incidência");
+                Console.WriteLine("6. Transformar em Matriz de Adjacencia/Distancia");
+                Console.WriteLine("7. Transformar em Lista de Adjacencia");
+                Console.WriteLine("8. Busca em Largura (BFS)");
+                Console.WriteLine("9. Busca em Profundidade (DFS)");
+                Console.WriteLine("10. Dijkstra");
+                Console.WriteLine("11. Prim");
+                Console.WriteLine("12. Ordenação Topologica");
+                Console.WriteLine("13. Ciclo Euleriano");
+                Console.WriteLine("99. Voltar");
 
-                Console.Write("Enter your choice (5-11): ");
-                if (int.TryParse(Console.ReadLine(), out choice))
+                Console.Write("Encolha um número (5-13)");
+                if (int.TryParse(Console.ReadLine(), out choiceTwo))
                 {
                     var initialVertex = new int();
-                    
-                    switch (choice)
+
+                    switch (choiceTwo)
                     {
                         case 5:
-                            Console.WriteLine("Choose the initial vertex.");
-                            initialVertex = int.Parse(Console.ReadLine());
-                            graph.ExecuteBFS(initialVertex);
-
+                            var matrizIncidencia = graph.TransformToIncidenceMatrix();
+                            GraphUtils.DisplayIncidenceTable(matrizIncidencia);
+                            GraphUtils.SalvarMatriz("Matriz_Incidencia_Output.txt", matrizIncidencia);
+                            GraphUtils.SalvarTabelaIncidencia("Tabela_Incidencia_Output.txt", matrizIncidencia);
                             break;
+
                         case 6:
-                            Console.WriteLine("Choose the initial vertex.");
-                            initialVertex = int.Parse(Console.ReadLine());
-                            graph.ExecuteDFS(initialVertex);
+                            var matrizDistancia = graph.TransformToDistanceMatrix();
+                            GraphUtils.DisplayAdjacencyMatrix(matrizDistancia);
+                            if (choice == 3)
+                            {
+                                GraphUtils.SalvarMatriz("Matriz_Distancias_Output.txt", matrizDistancia);
+                                break;
+                            } 
 
+                            GraphUtils.SalvarMatriz("Matriz_Adjacencia_Output.txt", matrizDistancia);
                             break;
+
                         case 7:
-                            Console.WriteLine("Choose the initial vertex.");
-                            initialVertex = int.Parse(Console.ReadLine());
-                            graph.ExecuteDijkstra(initialVertex);
-
+                            var listaDistancia = graph.TransformToAdjacencyList(choice);
+                            GraphUtils.DisplayAdjacencyList(listaDistancia);
+                            GraphUtils.SalvarLista("Lista_Adjacencia_Output.txt", listaDistancia);
                             break;
+
                         case 8:
-                            graph.ExecutePrim();
+                            Console.WriteLine("Escolha o vertice inicial");
+
+                            initialVertex = int.Parse(Console.ReadLine());
+                            graph.ExecuteBFS(initialVertex, grafo.CriarGrafo(graph.AdjacencyMatrix));
+
                             break;
                         case 9:
-                            graph.ExecuteTopologicalSort();
+                            Console.WriteLine("Escolha o vertice inicial");
+
+                            initialVertex = int.Parse(Console.ReadLine());
+                            grafo.CriarGrafo(graph.AdjacencyMatrix);
+                            graph.ExecuteDFS(initialVertex, grafo);
+
                             break;
                         case 10:
-                            graph.ExecuteEulerianCycle();
+                            Console.WriteLine("Escolha o vertice inicial");
+                            initialVertex = int.Parse(Console.ReadLine());
+
+                            graph.ExecuteDijkstra(graph.AdjacencyMatrix, initialVertex);
                             break;
                         case 11:
+                            graph.ExecutePrim(grafo);
+                            break;
+                        case 12:
+                            graph.ExecuteTopologicalSort(grafo.CriarGrafo(graph.AdjacencyMatrix));
+                            break;
+                        case 13:
+                            graph.ExecuteEulerianCycle(grafo);
                             break;
                         default:
-                            Console.WriteLine("Invalid choice. Please enter a number between 5 and 11.");
+                            Console.WriteLine("Escolha um número (5-14)");
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                    Console.WriteLine("Número inválido");
                 }
             }
             else
             {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
+                Console.WriteLine("Número inválido");
             }
-        } while (choice != 4);
+
+            graph = new GraphUtils(0);
+            grafo = new Grafo();
+        } while (choice != 99);
     }
 }

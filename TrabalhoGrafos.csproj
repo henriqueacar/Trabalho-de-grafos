@@ -7,4 +7,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Outputs\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Outputs\Matriz_Adjacencia_Output.txt" />
+      <None Remove="Outputs\Matriz_Distancias_Output.txt" />
+    </ItemGroup>
+
 </Project>
